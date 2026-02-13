@@ -10,7 +10,7 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+     public function index()
     {
         $posts = Post::paginate(10);
         return view('posts.index',['posts'=>$posts, 'page_title'=>'Posts']);

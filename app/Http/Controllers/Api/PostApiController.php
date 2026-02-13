@@ -26,7 +26,7 @@ class PostApiController extends Controller
             'author' => 'required|string|max:255|min:3',
         ]);
         $post = Post::create($data);
-        return response()->json($post, 201);
+        return response(['data' => $post, 'message' => 'Post created successfully'], 201);
     }
 
     /**
@@ -34,7 +34,7 @@ class PostApiController extends Controller
      */
     public function show(string $id)
     {
-        return response()->json(Post::find($id));
+        return response(['data' => Post::find($id)], 200);
     }
 
     /**
@@ -51,7 +51,7 @@ class PostApiController extends Controller
 
         $post->update($data);
 
-        return response()->json($post, 200);
+        return response(['data' => $post], 200);
     }
 
     /**
@@ -60,6 +60,6 @@ class PostApiController extends Controller
     public function destroy(string $id)
     {
         Post::destroy($id);
-        return response()->json("Post deleted successfully", 200);
+        return response(['message' => 'Post deleted successfully'], 200);
     }
 }
