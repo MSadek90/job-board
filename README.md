@@ -1,4 +1,4 @@
-<?php
+
 # Job Board
 
 A Laravel-based job board application with posts, comments, and tags management system.
@@ -112,9 +112,6 @@ composer run test
 - Additional features and optimizations
 - Comprehensive documentation
 
-## License
-
-This project is licensed under the MIT License.
 
 ---
 
