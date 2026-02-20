@@ -39,7 +39,7 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect('/posts');
+        return redirect('/posts')->with('success','Post created Successfully');
     }
 
     /**
