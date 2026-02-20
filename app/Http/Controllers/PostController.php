@@ -56,7 +56,8 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('posts.edit',['post'=>$post,'page_title'=>'Edit Post']);
     }
 
     /**
@@ -64,7 +65,15 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $post->title = $request->input('title');
+        $post->author= $request->input('author');
+        $post->description = $request->input('description');
+
+        $post->save();
+
+        return redirect('/posts')->with('success','Post updated Successfully');
     }
 
     /**
@@ -73,5 +82,9 @@ class PostController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function toggleActive(string $id){
+        
     }
 }
