@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $table = "post_schema";
-    protected $fillable = ['title','author'];
+    protected $fillable = ['title','author','description'];
 
     public function comments(){
         return $this->hasMany((Comment::class));

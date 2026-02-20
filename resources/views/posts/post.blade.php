@@ -1,4 +1,4 @@
-<x-layout :title="$pagetitle">
+<x-layout :title="$page_title">
     <strong> All Posts</strong>
     <br>
     <br>

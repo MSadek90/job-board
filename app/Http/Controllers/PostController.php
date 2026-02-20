@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Http\Requests\PostsPostRequest;
 
 class PostController extends Controller
 {
@@ -12,8 +13,8 @@ class PostController extends Controller
      */
      public function index()
     {
-        $posts = Post::paginate(10);
-        return view('posts.index',['posts'=>$posts, 'page_title'=>'Posts']);
+        $posts = Post::latest()->paginate(10);
+        return view('posts.post',['posts'=>$posts, 'page_title'=>'Posts']);
     }
 
     /**
@@ -21,15 +22,24 @@ class PostController extends Controller
      */
     public function create()
     {
-        
+        return view('posts.create',['page_title'=>'Create Post']);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostsPostRequest $request)
     {
-        //
+
+        $post = new Post();
+
+        $post->title = $request->input('title');
+        $post->author= $request->input('author');
+        $post->description = $request->input('description');
+
+        $post->save();
+
+        return redirect('/posts');
     }
 
     /**
