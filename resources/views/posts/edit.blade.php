@@ -10,9 +10,11 @@
 
             {{-- Form Card --}}
             <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-8">
-                <form action="/posts" method="PUT">
+                <form action="/posts/{{ $post->id }}" method="POST">
                     @csrf
                     @method('PUT')
+
+                    <input type="hidden" name="id" value="{{ $post->id }}">
 
                     {{-- Title --}}
                     <div class="mb-6">

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PostsPostRequest extends FormRequest
 {
@@ -22,9 +23,9 @@ class PostsPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'bail|required|max:255|unique:post_schema|min:3',
-            'author' => 'bail|required|max:255|min:3|unique:post_schema',
-            'description' => 'bail|required|max:255|min:3|unique:post_schema',
+            'title' => ['bail','required','max:255',Rule::unique('post_schema')->ignore($this->id),'min:3'],
+            'author' => ['bail','required','max:255','min:3'],
+            'description' => ['bail','required','max:255','min:3'],
         ];
     }
 

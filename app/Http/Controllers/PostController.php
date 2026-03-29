@@ -12,7 +12,7 @@ class PostController extends Controller
      * Display a listing of the resource.
      */
      public function index()
-    {
+    {   
         $posts = Post::latest()->paginate(10);
         return view('posts.post',['posts'=>$posts, 'page_title'=>'Posts']);
     }
@@ -63,7 +63,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PostsPostRequest $request, string $id)
     {
         $post = Post::findOrFail($id);
 
@@ -81,10 +81,15 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect('/posts')->with('success','Post deleted Successfully');
     }
 
     public function toggleActive(string $id){
         
     }
+
+
+   
 }

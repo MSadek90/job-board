@@ -71,7 +71,7 @@
 
                         {{-- Toggle Active --}}
                         <button type="button"
-                            onclick="openModal('{{ $post->is_active ? 'Deactivate' : 'Activate' }} Post', 'Are you sure you want to {{ $post->is_active ? 'deactivate' : 'activate' }} this post?', '/posts/{{ $post->id }}/toggle-active', 'PATCH', {{ $post->id }})"
+                            onclick="openModal('{{ $post->is_active}} Post', 'Are you sure you want to {{ $post->is_active }} this post?', '/posts/{{ $post->id }}/toggle-active', 'PATCH')"
                             class="inline-flex items-center gap-1.5 text-sm font-medium {{ $post->is_active ? 'text-orange-600 hover:text-orange-800' : 'text-emerald-600 hover:text-emerald-800' }} transition-colors">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728M9.172 14.828a4 4 0 010-5.656m5.656 0a4 4 0 010 5.656M12 12h.008v.008H12V12z"/>
@@ -81,7 +81,7 @@
 
                         {{-- Delete --}}
                         <button type="button"
-                            onclick="openModal('Delete Post', 'Are you sure you want to delete this post? This action cannot be undone.', '/posts/{{ $post->id }}', 'DELETE', {{ $post->id }})"
+                            onclick="openModal('Delete Post', 'Are you sure you want to delete this post? This action cannot be undone.', '/posts/{{ $post->id }}', 'DELETE')"
                             class="inline-flex items-center gap-1.5 text-sm font-medium text-red-600 hover:text-red-800 transition-colors">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
