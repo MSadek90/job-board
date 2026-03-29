@@ -12,7 +12,7 @@ class PostController extends Controller
      * Display a listing of the resource.
      */
      public function index()
-    {
+    {   
         $posts = Post::latest()->paginate(10);
         return view('posts.post',['posts'=>$posts, 'page_title'=>'Posts']);
     }
@@ -39,7 +39,7 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect('/posts');
+        return redirect('/posts')->with('success','Post created Successfully');
     }
 
     /**
@@ -56,15 +56,24 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('posts.edit',['post'=>$post,'page_title'=>'Edit Post']);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PostsPostRequest $request, string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $post->title = $request->input('title');
+        $post->author= $request->input('author');
+        $post->description = $request->input('description');
+
+        $post->save();
+
+        return redirect('/posts')->with('success','Post updated Successfully');
     }
 
     /**
@@ -72,6 +81,15 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect('/posts')->with('success','Post deleted Successfully');
     }
+
+    public function toggleActive(string $id){
+        
+    }
+
+
+   
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentPostRequest;
 use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -13,32 +14,30 @@ class CommentController extends Controller
      */
     public function index(Post $post)
     {
-         $comments = $post->comments;
-        return view(('comments/comment'),[
-            'comments' => $comments,
-            'pagetitle' => 'comments'
-        ]);
+
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request, Post $post)
     {
-           $comment = Comment::create([
-                'body'=> 'this a third comment',
-                'author' => 'fawzi',
-                'post_id' => '2'
-            ]);
-            return redirect()->route('post.index');
+       
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CommentPostRequest $request,Post $post)
     {
-        //
+        $comment = new Comment();
+
+        $comment->body= $request->input('body');
+        $comment->post_id= $post->id;
+
+        $comment->save();
+
+        return back();
     }
 
     /**
